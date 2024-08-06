@@ -1,7 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-  </component>
-</project>
+package com.exercise1;
+
+public final class SavingsAccount extends Account{
+    private static final double INTREST_RATE = 0.04;
+    private static final double MIN_bALANCE  = 500;
+
+    public SavingsAccount(int accountNumber,String name,double amount){
+        super(accountNumber,name,amount);
+    }
+
+    @Override
+    public void deposit(double amount){
+        this.amount += amount;
+        System.out.println(amount + "deposited in savings account.");
+    }
+    @Override
+    public void withdraw(double amount){
+        if(this.amount - amount < MIN_bALANCE) {
+            System.out.println("Cannot withdraw.Minimum balance should be" + MIN_bALANCE);
+        }
+            else{
+                this.amount = amount;
+                System.out.println(amount + "Withdraw from Savings Account ");
+
+        }
+    }
+
+}
