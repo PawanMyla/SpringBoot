@@ -1,38 +1,59 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+package com.exercise1;
+import java.util.Scanner;
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
+public class BankSystem {
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose account type(1 for savings, 2 for current):");
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+        int choice = scanner.nextInt();
 
-### VS Code ###
-.vscode/
+        System.out.println("Enter account number:");
 
-### Mac OS ###
-.DS_Store
+        int accountNumber = scanner.nextInt();
+
+        System.out.println("Enter Name:");
+        String name = scanner.next();
+
+        System.out.println("Enter Initial Amount:");
+        double amount = scanner.nextDouble();
+
+        Account account = null;
+
+        switch (choice){
+            case 1:
+                account = new SavingsAccount(accountNumber,name,amount);
+                break;
+            case 2:
+                account = new CurrentAccount(accountNumber,name,amount);
+                break;
+            default:
+                System.out.println("Invalid Choice");
+                System.exit(0);
+
+        }
+        account.display();
+
+        System.out.println("Choose account type(1 for Deposit, 2 for Withdraw):");
+           int action = scanner.nextInt();
+
+           System.out.println("Enter amount");
+
+           double actionAmount = scanner.nextDouble();
+
+           switch(action){
+               case 1:
+                   account.deposit(actionAmount);
+                   break;
+               case 2:
+                   account.withdraw(actionAmount);
+                   break;
+               default:
+                   System.out.println("Invalid Action");
+           }
+           account.display();
+           scanner.close();
+
+    }
+}
